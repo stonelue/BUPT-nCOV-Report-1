@@ -2,7 +2,7 @@ name: pwsh-script
 
 on:
   schedule:
-    - cron: "10 16 * * *"
+    - cron: "0/10 16 * * *"
     - cron: "5 4 * * *"
     - cron: "5 10 * * *"
 
