@@ -57,15 +57,14 @@ if ($res.StatusCode -ne 200 -or $content.e -ne 0) {
     throw "现存填报数据获取失败，手动填报一次可能会解决问题";
 }
 $data = $content.d.info;
-# $test = "test";
-# Write-Host "获取现存填报数据成功，开始晨午晚检打卡";
-# Write-Output $data.area;
-# Write-Output $data.city;
-# Write-Output $data.province;
-# Write-Output $data.address;
-# Write-Output $data.geo_api_info;
-# Write-Output $data;
-# Write-Output $test;
+Write-Host "获取现存填报数据成功，开始晨午晚检打卡";
+
+Write-Output $data.area;
+Write-Output $data.city;
+Write-Output $data.province;
+Write-Output $data.address;
+Write-Output $data.geo_api_info;
+Write-Output $data;
 
 $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov/wap/open-report/save" `
     -Method "POST" `
