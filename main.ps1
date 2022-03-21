@@ -59,20 +59,13 @@ if ($res.StatusCode -ne 200 -or $content.e -ne 0) {
 $data = $content.d.info;
 $test = "test";
 Write-Host "获取现存填报数据成功，开始晨午晚检打卡";
-$data.area;
-$data.city;
-$data.province;
-$data.address;
-$data.geo_api_info;
-$data;
-$test;
-$data.area
-$data.city
-$data.province
-$data.address
-$data.geo_api_info
-$data
-$test
+Write-Output $data.area;
+Write-Output $data.city;
+Write-Output $data.province;
+Write-Output $data.address;
+Write-Output $data.geo_api_info;
+Write-Output $data;
+Write-Output $test;
 
 # $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov/wap/open-report/save" `
 #     -Method "POST" `
