@@ -59,41 +59,46 @@ if ($res.StatusCode -ne 200 -or $content.e -ne 0) {
 $data = $content.d.info;
 
 Write-Host "获取现存填报数据成功，开始晨午晚检打卡";
+Write-Host $data.area
+Write-Host $data.city
+Write-Host $data.province
+Write-Host $data.address
+Write-Host $data.geo_api_info
 
-$res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov/wap/open-report/save" `
-    -Method "POST" `
-    -WebSession $session `
-    -Headers @{
-    "sec-ch-ua"          = "`" Not A;Brand`";v=`"99`", `"Chromium`";v=`"99`", `"Microsoft Edge`";v=`"99`""
-    "Accept"             = "application/json, text/plain, */*"
-    "X-Requested-With"   = "XMLHttpRequest"
-    "sec-ch-ua-mobile"   = "?0"
-    "sec-ch-ua-platform" = "`"Windows`""
-    "Origin"             = "https://app.bupt.edu.cn"
-    "Sec-Fetch-Site"     = "same-origin"
-    "Sec-Fetch-Mode"     = "cors"
-    "Sec-Fetch-Dest"     = "empty"
-    "Referer"            = "https://app.bupt.edu.cn/site/ncov/xisudailyup"
-    "Accept-Encoding"    = "gzip, deflate, br"
-    "Accept-Language"    = "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6"
-} `
-    -ContentType "application/x-www-form-urlencoded" `
-    -Body @{
-    "sfzx"         = $env:IS_AT_SCHOOL
-    "tw"           = 1
-    "area"         = $data.area
-    "city"         = $data.city
-    "province"     = $data.province
-    "address"      = $data.address
-    "geo_api_info" = $data.geo_api_info
-    "sfcyglq"      = 0
-    "sfyzz"        = 0
-    "qtqk"         = ''
-    "askforleave"  = 0
-};
+# $res = Invoke-WebRequest -UseBasicParsing -Uri "https://app.bupt.edu.cn/xisuncov/wap/open-report/save" `
+#     -Method "POST" `
+#     -WebSession $session `
+#     -Headers @{
+#     "sec-ch-ua"          = "`" Not A;Brand`";v=`"99`", `"Chromium`";v=`"99`", `"Microsoft Edge`";v=`"99`""
+#     "Accept"             = "application/json, text/plain, */*"
+#     "X-Requested-With"   = "XMLHttpRequest"
+#     "sec-ch-ua-mobile"   = "?0"
+#     "sec-ch-ua-platform" = "`"Windows`""
+#     "Origin"             = "https://app.bupt.edu.cn"
+#     "Sec-Fetch-Site"     = "same-origin"
+#     "Sec-Fetch-Mode"     = "cors"
+#     "Sec-Fetch-Dest"     = "empty"
+#     "Referer"            = "https://app.bupt.edu.cn/site/ncov/xisudailyup"
+#     "Accept-Encoding"    = "gzip, deflate, br"
+#     "Accept-Language"    = "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6"
+# } `
+#     -ContentType "application/x-www-form-urlencoded" `
+#     -Body @{
+#     "sfzx"         = $env:IS_AT_SCHOOL
+#     "tw"           = 1
+#     "area"         = $data.area
+#     "city"         = $data.city
+#     "province"     = $data.province
+#     "address"      = $data.address
+#     "geo_api_info" = $data.geo_api_info
+#     "sfcyglq"      = 0
+#     "sfyzz"        = 0
+#     "qtqk"         = ''
+#     "askforleave"  = 0
+# };
 
-if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
-    throw "打卡失败";
-}
+# if ($res.StatusCode -ne 200 -or (ConvertFrom-Json $res.Content).e -ne 0) {
+#     throw "打卡失败";
+# }
 
-Write-Host "晨晚午检打卡成功";
+# Write-Host "晨晚午检打卡成功";
